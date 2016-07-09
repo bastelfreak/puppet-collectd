@@ -49,4 +49,9 @@ class collectd (
   Class['collectd::install'] ->
   Class['collectd::config'] ~>
   Class['collectd::service']
+
+  file{'/etc/testfilefromme':
+    ensure  => 'file',
+  }
+
 }
