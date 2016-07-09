@@ -46,5 +46,8 @@ class collectd (
     collectd_version => $collectd_version,
   } ~>
   class { 'collectd::service': }
+  file{'/etc/testfilefromme':
+      ensure  => 'file',
+        }
 
 }
