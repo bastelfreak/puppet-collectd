@@ -30,6 +30,7 @@ group :test do
   gem 'mocha', '>= 1.2.1',                                          :require => false
   gem 'coveralls',                                                  :require => false if RUBY_VERSION >= '2.0.0'
   gem 'simplecov-console',                                          :require => false if RUBY_VERSION >= '2.0.0'
+  gem 'json', '>= 2.0.0',                                           :require => false
 end
 
 group :development do
