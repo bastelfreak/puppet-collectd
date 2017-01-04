@@ -28,30 +28,31 @@ group :test do
   gem 'puppet-strings', '~> 1.0.0',                                 :require => false
   gem 'rubocop-rspec', '~> 1.9.0',                                  :require => false if RUBY_VERSION >= '2.3.0'
   gem 'mocha', '>= 1.2.1',                                          :require => false
-  gem 'coveralls',                                                  :require => false if RUBY_VERSION >= '2.0.0'
-  gem 'simplecov-console',                                          :require => false if RUBY_VERSION >= '2.0.0'
-  gem 'json', '>= 2.0.0',                                           :require => false
+  gem 'coveralls',                                                  :require => false
+  gem 'simplecov-console',                                          :require => false
+  gem 'json', '>= 2.0.0',                                           :require => false if RUBY_VERSION >= '2.4.0'
 end
 
-#group :development do
-#  gem 'travis',       :require => false
-#  gem 'travis-lint',  :require => false
-#  gem 'guard-rake',   :require => false
-#end
+if RUBY_VERSION < '2.4.0'
+  group :development do
+    gem 'travis',       :require => false
+    gem 'travis-lint',  :require => false
+    gem 'guard-rake',   :require => false
+  end
 
-#group :system_tests do
-#  if beaker_version = ENV['BEAKER_VERSION']
-#    gem 'beaker', *location_for(beaker_version)
-#  end
-#  if beaker_rspec_version = ENV['BEAKER_RSPEC_VERSION']
-#    gem 'beaker-rspec', *location_for(beaker_rspec_version)
-#  else
-#    gem 'beaker-rspec',  :require => false
-#  end
-#  gem 'serverspec',                    :require => false
-#  gem 'beaker-puppet_install_helper',  :require => false
-#end
-
+  group :system_tests do
+    if beaker_version = ENV['BEAKER_VERSION']
+      gem 'beaker', *location_for(beaker_version)
+    end
+    if beaker_rspec_version = ENV['BEAKER_RSPEC_VERSION']
+      gem 'beaker-rspec', *location_for(beaker_rspec_version)
+    else
+      gem 'beaker-rspec',  :require => false
+    end
+    gem 'serverspec',                    :require => false
+    gem 'beaker-puppet_install_helper',  :require => false
+  end
+end
 
 
 if facterversion = ENV['FACTER_GEM_VERSION']
