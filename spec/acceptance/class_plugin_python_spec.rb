@@ -27,7 +27,7 @@ describe 'collectd::plugin::python class' do
   context 'trivial pip module connect-time' do
     it 'works idempotently with no errors' do
       pp = <<-EOS
-      if $facts['os']['family'] == 'RedHat' and $facts['os']['release']['major'] == '8'  {
+      if ($facts['os']['family'] == 'RedHat' and $facts['os']['release']['major'] == '8') or ($facts['os']['name'] == 'Ubuntu' and $facts['os']['release']['major'] == '20.04') {
         $_python_pip_package = 'python3-pip'
         $_pip_provider = 'pip3'
       } else {
@@ -85,7 +85,7 @@ describe 'collectd::plugin::python class' do
 	        ensure => present,
         }
       }
-      if $facts['os']['family'] == 'RedHat' and $facts['os']['release']['major'] == '8'  {
+      if ($facts['os']['family'] == 'RedHat' and $facts['os']['release']['major'] == '8') or ($facts['os']['name'] == 'Ubuntu' and $facts['os']['release']['major'] == '20.04') {
         $_python_pip_package = 'python3-pip'
         $_pip_provider = 'pip3'
       } else {

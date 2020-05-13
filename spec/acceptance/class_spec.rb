@@ -32,7 +32,7 @@ describe 'collectd class' do
       class { '::collectd::plugin::memory': }
 
       # rabbitmq plugin not ported to Python3
-      unless $facts['os']['family'] == 'RedHat' and $facts['os']['release']['major'] == '8' {
+      unless ($facts['os']['family'] == 'RedHat' and $facts['os']['release']['major'] == '8') or ($facts['os']['name'] == 'Ubuntu' and $facts['os']['release']['major'] == '20.04') {
         class { '::collectd::plugin::rabbitmq': }
       }
       class { 'collectd::plugin::csv':}
@@ -43,7 +43,7 @@ describe 'collectd class' do
       apply_manifest(pp, catch_changes: true)
     end
 
-    if fact('osfamily') == 'Debian'
+    if fact('osfamily') == 'Debian' && fact('os.release.major') != '20.04'
       describe file('/etc/collectd/conf.d/10-rabbitmq.conf') do
         it { is_expected.to be_file }
         it { is_expected.to contain 'TypesDB "/usr/local/share/collectd-rabbitmq/types.db.custom"' }
